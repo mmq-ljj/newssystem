@@ -1,0 +1,34 @@
+{
+    "news": [
+        {
+            "title": "666",
+            "author": "555",
+            "id": 1
+        },
+        {
+            "id": 3,
+            "title": "333",
+            "author": "qqt"
+        },
+        {
+            "title": "444",
+            "author": "xfx",
+            "id": 4
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "111 comment",
+            "newsId": 1
+        },
+        {
+            "id": 2,
+            "body": "222 comment",
+            "newsId": 2
+        }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+}

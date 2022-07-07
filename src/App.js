@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
 
+import React from 'react'
+import './App.css'
+// import axios from 'axios'
+import IndexRouter from './router/IndexRouter'
+
+// app根组件
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  // return (
+  //   <div id=''>
+  //     <IndexRouter></IndexRouter>
+  //   </div>
+  // )
+
+  // 注册路由 根据路劲 展示对应的 路由组件 (一级路由) 
+  return <IndexRouter></IndexRouter>
 }
 
-export default App;
+
+export default App
