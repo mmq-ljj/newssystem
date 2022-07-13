@@ -91,6 +91,8 @@ export default function RoleList() {
         confirm({
             title: '是否需要删除该角色?',
             icon: <ExclamationCircleOutlined />,
+            okText: "确定",
+            cancelText: "取消",
             // content: 'Some descriptions',
             onOk() { deleteRole(role) },
             onCancel() { },
@@ -180,7 +182,13 @@ export default function RoleList() {
                 rowKey={(item) => item.id}
                 bordered
             />
-            <Modal title="权限分配" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal
+                title="权限分配"
+                okText="确定"
+                cancelText="取消"
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}>
                 <Tree
                     checkable
                     checkedKeys={currentRights}

@@ -23,8 +23,6 @@ export default function RightList() {
 
     // const [checked, seChecked] = useState(true)
 
-
-
     // 表结构
     const columns = [
         {
@@ -147,8 +145,10 @@ export default function RightList() {
     const ifDelete = (row) => {
         // console.log(row);
         confirm({
-            title: 'Do you Want to delete these items?',
+            title: '是否删除该权限',
             icon: <ExclamationCircleOutlined />,
+            okText: "确定",
+            cancelText: "取消",
             // content: 'Some descriptions', // 内容
             // 确认
             onOk() {

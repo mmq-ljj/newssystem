@@ -10,7 +10,7 @@
       "roleId": 1
     },
     {
-      "username": "铁锤",
+      "username": "铁锤123",
       "password": "123",
       "roleState": true,
       "default": false,
@@ -71,6 +71,15 @@
       "region": "亚洲",
       "roleId": 3,
       "id": 8
+    },
+    {
+      "username": "mmq",
+      "password": "123",
+      "region": "",
+      "roleId": 1,
+      "roleState": true,
+      "default": false,
+      "id": 9
     }
   ],
   "roles": [
@@ -79,33 +88,33 @@
       "roleName": "超级管理员",
       "roleType": 1,
       "rights": [
+        "/user-manage/add",
+        "/user-manage/delete",
+        "/user-manage/update",
+        "/user-manage/list",
+        "/right-manage",
+        "/right-manage/role/list",
+        "/right-manage/right/list",
+        "/right-manage/role/update",
+        "/right-manage/role/delete",
+        "/right-manage/right/update",
+        "/right-manage/right/delete",
+        "/news-manage",
         "/news-manage/list",
         "/news-manage/add",
         "/news-manage/update/:id",
         "/news-manage/preview/:id",
         "/news-manage/draft",
         "/news-manage/category",
+        "/audit-manage",
         "/audit-manage/audit",
         "/audit-manage/list",
+        "/publish-manage",
         "/publish-manage/unpublished",
         "/publish-manage/published",
         "/publish-manage/sunset",
-        "/right-manage/role/list",
-        "/right-manage/right/list",
-        "/right-manage/role/update",
-        "/right-manage/right/update",
-        "/right-manage/role/delete",
-        "/right-manage/right/delete",
-        "/home",
-        "/user-manage/add",
-        "/right-manage",
-        "/news-manage",
-        "/audit-manage",
-        "/publish-manage",
         "/user-manage",
-        "/user-manage/delete",
-        "/user-manage/update",
-        "/user-manage/list"
+        "/home"
       ]
     },
     {
@@ -114,25 +123,25 @@
       "roleType": 2,
       "rights": [
         "/home",
+        "/user-manage",
         "/user-manage/add",
         "/user-manage/delete",
         "/user-manage/update",
         "/user-manage/list",
+        "/news-manage",
+        "/news-manage/list",
+        "/news-manage/add",
         "/news-manage/update/:id",
         "/news-manage/preview/:id",
         "/news-manage/draft",
         "/news-manage/category",
+        "/audit-manage",
         "/audit-manage/audit",
         "/audit-manage/list",
+        "/publish-manage",
         "/publish-manage/unpublished",
         "/publish-manage/published",
-        "/publish-manage/sunset",
-        "/user-manage",
-        "/audit-manage",
-        "/publish-manage",
-        "/news-manage/add",
-        "/news-manage/list",
-        "/news-manage"
+        "/publish-manage/sunset"
       ]
     },
     {
@@ -141,16 +150,18 @@
       "roleType": 3,
       "rights": [
         "/home",
+        "/news-manage",
         "/news-manage/list",
         "/news-manage/add",
         "/news-manage/update/:id",
         "/news-manage/preview/:id",
         "/news-manage/draft",
+        "/audit-manage",
         "/audit-manage/list",
+        "/publish-manage",
         "/publish-manage/unpublished",
         "/publish-manage/published",
-        "/publish-manage/sunset",
-        "/publish-manage"
+        "/publish-manage/sunset"
       ]
     }
   ],
