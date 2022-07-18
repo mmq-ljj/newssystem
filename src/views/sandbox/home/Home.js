@@ -10,7 +10,7 @@ export default function Home() {
   //   console.log(res);
   // }
 
-  // 增 post
+  // 增 post"/rights"
   // const add = async () => {
   //   const { data: res } = await axios.post('http://localhost:8000/news', {
   //     "title": "444",

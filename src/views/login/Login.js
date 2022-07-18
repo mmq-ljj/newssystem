@@ -12,7 +12,7 @@ export default function login(props) {
   // 登录表单 确定回调
   const onFinish = (values) => {
     // console.log(values);
-    axios.get(`http://localhost:5000/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`)
+    axios.get(`/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`)
       .then(res => {
         // console.log(res);
         if (res.data.length !== 0) {

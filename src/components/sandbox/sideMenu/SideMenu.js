@@ -61,7 +61,7 @@ function SideMenu(props) {
 
     // 获取侧边导航栏
     const getMenuList = () => {
-        axios.get('http://localhost:5000/rights?_embed=children').then(res => {
+        axios.get('/rights?_embed=children').then(res => {
             // console.log(res.data);
             const resList = res.data
             // console.log(resList);

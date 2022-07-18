@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SideMenu from '../../components/sandbox/sideMenu/SideMenu'
 import TopHeader from '../../components/sandbox/topHeader/TopHeader'
 import NewsRouter from '../../components/newsRouter/NewsRouter'
+import nProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 import { Layout } from 'antd'
 import './newsSandBox.scss'
@@ -10,6 +12,12 @@ const { Content } = Layout;
 
 // 新闻发布组件
 export default function NewsSandBox() {
+  nProgress.start()
+
+  useEffect(() => {
+    nProgress.done()
+  })
+
   return (
     <Layout>
       {/* 侧边栏 */}

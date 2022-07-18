@@ -59,11 +59,11 @@ export default function UserList() {
   // 获取用户列表
   const getUserList = async () => {
     // let userRoleList = []
-    // const { data: userRoleList } = await axios.get('http://localhost:5000/users?_expand=role')
+    // const { data: userRoleList } = await axios.get('/users?_expand=role')
     // console.log(userRoleList);
 
     // 获取用户列表
-    const { data: userList } = await axios.get('http://localhost:5000/users')
+    const { data: userList } = await axios.get('/users')
     // console.log(userList);
     // setUserList(userList)
 
@@ -80,14 +80,14 @@ export default function UserList() {
 
   // 获取区域下拉菜单
   const getRegionList = () => {
-    axios.get('http://localhost:5000/regions').then(res => {
+    axios.get('/regions').then(res => {
       setRegionList(res.data)
     })
   }
 
   // 获取角色下拉菜单
   const getRoleList = () => {
-    axios.get('http://localhost:5000/roles').then(res => {
+    axios.get('/roles').then(res => {
       setRoleList(res.data)
     })
   }
@@ -197,7 +197,7 @@ export default function UserList() {
     row.roleState = !row.roleState
     // console.log(userList);
     setUserList([...userList])
-    axios.patch(`http://localhost:5000/users/${row.id}`, {
+    axios.patch(`/users/${row.id}`, {
       roleState: row.roleState
     }).then(res => {
       if (res.status === 200) {
@@ -222,7 +222,7 @@ export default function UserList() {
 
   // 确定删除用户
   const deleteUser = (user) => {
-    axios.delete(`http://localhost:5000/users/${user.id}`).then(res => {
+    axios.delete(`/users/${user.id}`).then(res => {
       if (res.status === 200) {
         // 重新渲染数据
         message.success('删除成功！')
@@ -263,7 +263,7 @@ export default function UserList() {
     updateFormRef.current.validateFields()
       .then(formData => {
         // console.log(formData);
-        axios.patch(`http://localhost:5000/users/${updateId}`, {
+        axios.patch(`/users/${updateId}`, {
           ...formData,
         }).then(res => {
           console.log(res);
@@ -292,7 +292,7 @@ export default function UserList() {
         addFormRef.current.resetFields()
         console.log(formData);
         // 传给后端
-        axios.post('http://localhost:5000/users', {
+        axios.post('/users', {
           ...formData,
           "roleState": false,  // 用户状态
           "default": false,    // 是否为超级管理员

@@ -95,7 +95,7 @@ export default function RightList() {
 
     // 获取权限列表
     const getRightList = () => {
-        axios.get("http://localhost:5000/rights?_embed=children").then(res => {
+        axios.get("/rights?_embed=children").then(res => {
             const handleList = res.data
             handleList.forEach(item => {
                 if (item.children.length === 0) {
@@ -118,7 +118,7 @@ export default function RightList() {
         setDataSource([...dataSource])
 
         if (row.grade === 1) {
-            axios.patch(`http://localhost:5000/rights/${row.id}`, {
+            axios.patch(`/rights/${row.id}`, {
                 pagepermisson: row.pagepermisson
             }).then(res => {
                 if (res.status === 200) {
@@ -129,7 +129,7 @@ export default function RightList() {
             })
         } else if (row.grade === 2) {
             // console.log(row.grade);
-            axios.patch(`http://localhost:5000/children/${row.id}`, {
+            axios.patch(`/children/${row.id}`, {
                 pagepermisson: row.pagepermisson
             }).then(res => {
                 if (res.status === 200) {
@@ -164,7 +164,7 @@ export default function RightList() {
         // console.log(row.grade);
         // 一级路由权限
         if (row.grade === 1) {
-            axios.delete(`http://localhost:5000/rights/${row.id}`).then(res => {
+            axios.delete(`/rights/${row.id}`).then(res => {
                 if (res.status === 200) {
                     // 重新渲染数据
                     message.success('删除成功！')
@@ -175,7 +175,7 @@ export default function RightList() {
             // 二级路由权限
         } else if (row.grade === 2) {
             // console.log(row.grade);
-            axios.delete(`http://localhost:5000/children/${row.id}`).then(res => {
+            axios.delete(`/children/${row.id}`).then(res => {
                 if (res.status === 200) {
                     message.success('删除成功！')
                     // 重新渲染数据

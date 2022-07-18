@@ -66,7 +66,7 @@ export default function RoleList() {
 
     // 获取角色列表
     const getRoleList = () => {
-        axios.get('http://localhost:5000/roles').then(res => {
+        axios.get('/roles').then(res => {
             // console.log(res.data);
             setRoleList(res.data)
         })
@@ -74,7 +74,7 @@ export default function RoleList() {
 
     // 获取权限列表
     const getRightList = () => {
-        axios.get("http://localhost:5000/rights?_embed=children").then(res => {
+        axios.get("/rights?_embed=children").then(res => {
             const handleList = res.data
             handleList.forEach(item => {
                 if (item.children.length === 0) {
@@ -102,7 +102,7 @@ export default function RoleList() {
     // 删除角色
     const deleteRole = (role) => {
         // console.log(role);
-        axios.delete(`http://localhost:5000/roles/${role.id}`).then(res => {
+        axios.delete(`/roles/${role.id}`).then(res => {
             if (res.status === 200) {
                 // 重新渲染数据
                 message.success('删除成功！')
@@ -151,7 +151,7 @@ export default function RoleList() {
         console.log(currentRights.checked);
         // 向后端发送分配后的权限
         // patch
-        axios.patch(`http://localhost:5000/roles/${roleId}`, {
+        axios.patch(`/roles/${roleId}`, {
             rights: currentRights.checked
         }).then(res => {
             if (res.status === 200) {
