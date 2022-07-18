@@ -113,22 +113,23 @@ export default function RoleList() {
 
     // 分配权限
     const clickEdit = (role) => {
+        console.log(role);
         // console.log(role);
         setRoleId(role.id)
         let noFatherNodes = role.rights
-        noFatherNodes = noFatherNodes.filter(right => {
-            // 默认不勾选父级 只勾选子级 
-            if (right !== '/user-manage' &&
-                right !== '/right-manage' &&
-                right !== '/news-manage' &&
-                right !== '/audit-manage' &&
-                right !== '/publish-manage') {
-                // console.log(right);
-                return right
-            } else {
-                return ''
-            }
-        })
+        // noFatherNodes = noFatherNodes.filter(right => {
+        //     // 默认不勾选父级 只勾选子级 
+        //     if (right !== '/user-manage' &&
+        //         right !== '/right-manage' &&
+        //         right !== '/news-manage' &&
+        //         right !== '/audit-manage' &&
+        //         right !== '/publish-manage') {
+        //         // console.log(right);
+        //         return right
+        //     } else {
+        //         return ''
+        //     }
+        // })
         setCurrentRights(noFatherNodes)
         setIsModalVisible(true);
     }
@@ -147,10 +148,11 @@ export default function RoleList() {
         //     return role
         // }))
 
+        console.log(currentRights.checked);
         // 向后端发送分配后的权限
         // patch
         axios.patch(`http://localhost:5000/roles/${roleId}`, {
-            rights: currentRights
+            rights: currentRights.checked
         }).then(res => {
             if (res.status === 200) {
                 message.success('修改成功！')
@@ -194,7 +196,7 @@ export default function RoleList() {
                     checkedKeys={currentRights}
                     onCheck={onCheck}
                     treeData={rightList}
-                    // checkStrictly={true}  // 父子节点选中状态不再关联
+                    checkStrictly={true}  // 父子节点选中状态不再关联
                     defaultExpandAll
                 />
             </Modal>

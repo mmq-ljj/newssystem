@@ -47,6 +47,8 @@ export default function UserList() {
   // 修改用户id 
   const [updateId, setUpdateId] = useState(null)
 
+  // 从localStorage取出登录时存入的用户信息
+  const { roleId, region, username } = JSON.parse(localStorage.getItem('token'))
 
   useEffect(() => {
     getUserList()   // 获取用户
@@ -55,16 +57,24 @@ export default function UserList() {
   }, [])
 
   // 获取用户列表
-  const getUserList = () => {
-    // axios.get('http://localhost:5000/users?_expand=role')
-    //   .then(res => {
-    //     setUserList(res.data)
-    //   })
+  const getUserList = async () => {
+    // let userRoleList = []
+    // const { data: userRoleList } = await axios.get('http://localhost:5000/users?_expand=role')
+    // console.log(userRoleList);
 
-    axios.get('http://localhost:5000/users')
-      .then(res => {
-        setUserList(res.data)
-      })
+    // 获取用户列表
+    const { data: userList } = await axios.get('http://localhost:5000/users')
+    // console.log(userList);
+    // setUserList(userList)
+
+    // console.log(roleId);
+    // console.log(res.data);
+    setUserList(roleId === 1 ?
+      userList :
+      [...userList.filter(item => item.username === username),
+      ...userList.filter(item => item.region === region && item.roleId === roleId)
+      ]
+    )
 
   }
 
@@ -332,7 +342,9 @@ export default function UserList() {
         <UserForm
           regionList={regionList}
           roleList={roleList}
-          ref={addFormRef}>
+          ref={addFormRef}
+          isUpdate={false}
+        >
         </UserForm>
       </Modal>
 
@@ -352,7 +364,9 @@ export default function UserList() {
           regionList={regionList}
           roleList={roleList}
           isUpdateDisabled={isUpdateDisabled}
-          ref={updateFormRef}>
+          ref={updateFormRef}
+          isUpdate={true}
+        >
         </UserForm>
       </Modal>
     </div>

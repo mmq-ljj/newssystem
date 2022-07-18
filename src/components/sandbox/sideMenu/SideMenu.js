@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Layout, Menu } from 'antd';
 import axios from 'axios'
-import style from './sideMenu.scss'
+import './sideMenu.scss'
 
 // 1.withRouter高阶组件 包裹低阶组件
 // 2.可以通过withRouter拿到history属性
@@ -13,7 +13,7 @@ import {
     HomeOutlined,
     AppstoreOutlined
 } from '@ant-design/icons';
-import './index.css'
+// import './index.css'
 const { Sider } = Layout;
 
 
@@ -50,6 +50,10 @@ const iconList = {
 function SideMenu(props) {
     const [menuList, setMenList] = React.useState([])
 
+    // 该用户的路由权限
+    const { role: { rights } } = JSON.parse(localStorage.getItem('token'))
+    // console.log(rights);
+
     useEffect(() => {
         getMenuList()
         return () => { }
@@ -62,6 +66,7 @@ function SideMenu(props) {
             const resList = res.data
             // console.log(resList);
             const menuData = handleMenuData(resList)
+            // console.log(menuData);
             setMenList(menuData)
             // console.log(menuData);
         })
@@ -71,8 +76,10 @@ function SideMenu(props) {
     const handleMenuData = (resList) => {
         // console.log(resList);
         resList = resList.map(menu => {
+            // console.log(menu);
             // 1 为页面权限
-            if (menu.pagepermisson === 1) {
+            // && rights.includes(menu.key)
+            if (menu.pagepermisson === 1 && rights.includes(menu.key)) {
                 // console.log(menu);
                 const obj = {}
                 // 标题

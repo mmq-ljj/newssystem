@@ -11,8 +11,53 @@ const UserForm = forwardRef((props, ref) => {
     // 是否禁用区域
     const [isDisabled, setIsDisabled] = useState(false)
     // console.log(ref);
-    const { regionList, roleList, isUpdateDisabled } = props
+    const { regionList, roleList, isUpdateDisabled, isUpdate } = props
+    // console.log(isUpdate);
+    const { roleId, region: regions, username } = JSON.parse(localStorage.getItem('token'))
+    // console.log(roleId);
 
+    // 区域禁用
+    const checkRegionDisabled = (region) => {
+        // 编辑
+        if (isUpdate) {
+            // 超级管理员
+            if (roleId === 1) {
+                return false
+            } else {
+                return region.title !== regions  // 当前选项和用户的区域不是一个大区域，则返回true 改项则禁用
+            }
+            // 新增
+        } else {
+            // 超级管理员
+            if (roleId === 1) {
+                return false
+            } else {
+                return region.title !== regions
+            }
+        }
+    }
+
+    // 角色禁用
+    const checkRoleDisabled = (role) => {
+        // console.log(role.roleName);
+        if (isUpdate) {
+            // 超级管理员
+            // console.log(roleId);
+            if (roleId === 1) {
+                return false
+            } else {
+                return true
+            }
+            // 新增
+        } else {
+            // 超级管理员
+            if (roleId === 1) {
+                return false
+            } else {
+                return role.id !== 3
+            }
+        }
+    }
 
     useEffect(() => {
         // console.log(isUpdateDisabled);
@@ -51,7 +96,9 @@ const UserForm = forwardRef((props, ref) => {
                         regionList.map(region =>
                             <Option
                                 value={region.value}
-                                key={region.id}>
+                                key={region.id}
+                                disabled={checkRegionDisabled(region)}
+                            >
                                 {region.title}
                             </Option>
                         )
@@ -82,7 +129,9 @@ const UserForm = forwardRef((props, ref) => {
                         roleList.map(role =>
                             <Option
                                 value={role.id}
-                                key={role.id}>
+                                key={role.id}
+                                disabled={checkRoleDisabled(role)}
+                            >
                                 {role.roleName}
                             </Option>
                         )

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "username": "admin",
-      "password": 123456,
+      "password": "000",
       "roleState": true,
       "default": true,
       "region": "",
@@ -74,12 +74,21 @@
     },
     {
       "username": "mmq",
-      "password": "123",
-      "region": "",
-      "roleId": 1,
+      "password": "000",
+      "region": "亚洲",
+      "roleId": 2,
       "roleState": true,
       "default": false,
-      "id": 9
+      "id": 10
+    },
+    {
+      "username": "oot",
+      "password": "000",
+      "region": "欧洲",
+      "roleId": 2,
+      "roleState": true,
+      "default": false,
+      "id": 11
     }
   ],
   "roles": [
@@ -123,25 +132,25 @@
       "roleType": 2,
       "rights": [
         "/home",
-        "/user-manage",
-        "/user-manage/add",
-        "/user-manage/delete",
-        "/user-manage/update",
-        "/user-manage/list",
-        "/news-manage",
         "/news-manage/list",
         "/news-manage/add",
         "/news-manage/update/:id",
         "/news-manage/preview/:id",
         "/news-manage/draft",
         "/news-manage/category",
-        "/audit-manage",
+        "/user-manage/delete",
+        "/user-manage/update",
+        "/user-manage/list",
         "/audit-manage/audit",
         "/audit-manage/list",
-        "/publish-manage",
-        "/publish-manage/unpublished",
+        "/publish-manage/sunset",
         "/publish-manage/published",
-        "/publish-manage/sunset"
+        "/user-manage/add",
+        "/user-manage",
+        "/news-manage",
+        "/audit-manage",
+        "/publish-manage",
+        "/publish-manage/unpublished"
       ]
     },
     {
@@ -150,18 +159,17 @@
       "roleType": 3,
       "rights": [
         "/home",
-        "/news-manage",
         "/news-manage/list",
         "/news-manage/add",
         "/news-manage/update/:id",
         "/news-manage/preview/:id",
         "/news-manage/draft",
-        "/audit-manage",
         "/audit-manage/list",
-        "/publish-manage",
-        "/publish-manage/unpublished",
         "/publish-manage/published",
-        "/publish-manage/sunset"
+        "/publish-manage/sunset",
+        "/publish-manage",
+        "/news-manage",
+        "/audit-manage"
       ]
     }
   ],
