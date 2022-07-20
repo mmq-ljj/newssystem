@@ -94,7 +94,7 @@ function SideMenu(props) {
                 // 跳转方法
                 if (!menu.children || menu.children.length === 0) {
                     obj.onClick = () => {
-                        console.log(obj.key);
+                        // console.log(obj.key);
                         props.history.push(obj.key)
                     }
                 }

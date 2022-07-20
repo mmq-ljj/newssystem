@@ -14,6 +14,8 @@ import NoPermisssion from '../../views/sandbox/nopermission/NoPermission'
 import NewsAdd from '../../views/sandbox/news-manage/NewsAdd'
 import NewsDraft from '../../views/sandbox/news-manage/NewsDraft'
 import NewsCategory from '../../views/sandbox/news-manage/NewsCategory'
+import NewsPreview from '../../views/sandbox/news-manage/NewsPreview'
+import NewsUpdate from '../../views/sandbox/news-manage/NewsUpdate'
 // 审核管理
 import Audit from '../../views/sandbox/audit-manage/Audit'
 import AuditList from '../../views/sandbox/audit-manage/AuditList'
@@ -36,6 +38,9 @@ const LocalRouterMap = {
     "/news-manage/add": NewsAdd,      // 撰写新闻
     "/news-manage/draft": NewsDraft,    // 草稿箱
     "/news-manage/category": NewsCategory, // 新闻分类
+    "/news-manage/preview/:id": NewsPreview, // 新闻查看草稿箱
+    "/news-manage/update/:id": NewsUpdate, // 新闻编辑
+
     // 审核管理
     "/audit-manage/audit": Audit,    // 审核新闻
     "/audit-manage/list": AuditList,     // 审核列表
@@ -63,7 +68,7 @@ export default function NewsRouter() {
 
     const checkRoute = (item) => {
         // 权限管理 - 权限列表里去配置该页面是否可查看
-        return LocalRouterMap[item.key] && item.pagepermisson
+        return LocalRouterMap[item.key] && (item.pagepermisson || item.routepermisson)
     }
 
     const checkUserPermission = (item) => {
@@ -71,28 +76,20 @@ export default function NewsRouter() {
         return rights.includes(item.key)
     }
 
-
-
     return (
         <div>
             {/* 根据路由地址 展示 对应组件 (二级路由) */}
             <Switch>
-                {/* <Route path='/home' component={Home}></Route>
-                <Route path='/user-manage/list' component={UserList}></Route>
-                <Route path='/right-manage/role/list' component={RoleList}></Route>
-                <Route path='/right-manage/right/list' component={RightList}></Route> */}
-
                 {
                     backRouteList.map(item => {
-                        if (checkRoute(item) && checkUserPermission(item)) {
+                        if (checkRoute(item) &&
+                            checkUserPermission(item)) {
                             return <Route path={item.key} key={item.key} component={LocalRouterMap[item.key]} exact></Route>
                         } else {
                             return null
                         }
                     })
                 }
-
-
 
                 {/* exact 精确匹配 */}
                 <Redirect from='/' to='/home' exact />

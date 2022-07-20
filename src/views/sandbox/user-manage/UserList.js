@@ -326,6 +326,7 @@ export default function UserList() {
         pagination={{
           pageSize: 6
         }}
+        rowKey={item => item.id}
       />
 
       {/* 添加用户 对话框 */}

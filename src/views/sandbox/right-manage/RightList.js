@@ -195,6 +195,7 @@ export default function RightList() {
             pagination={{
                 pageSize: 5
             }}
+            rowKey={item => item.id}
         />
     )
 }

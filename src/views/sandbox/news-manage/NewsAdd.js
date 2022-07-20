@@ -12,13 +12,13 @@ import {
 import style from './News.module.css'
 import axios from 'axios';
 import NewsEditor from '../../../components/news-manage/NewsEditor'
-import { type } from '@testing-library/user-event/dist/type';
 
 const { Step } = Steps;
 const { Option } = Select;
 
 // console.log(style);
 
+// 撰写新闻
 export default function NewsAdd(props) {
 
   const [currentStep, setCurrentStep] = useState(0)
@@ -32,7 +32,7 @@ export default function NewsAdd(props) {
   const [content, setContent] = useState("")
   // 从本地取出用户信息
   const user = JSON.parse(localStorage.getItem('token'))
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     getNewsCategory()
@@ -52,6 +52,7 @@ export default function NewsAdd(props) {
       // console.log(NewsForm);
       NewsForm.current.validateFields()
         .then(res => {
+          console.log(res);
           // 基本信息
           setFormInfo(res)
           setCurrentStep(currentStep + 1)
@@ -77,8 +78,9 @@ export default function NewsAdd(props) {
 
   const handleSave = (auditState) => {
     axios.post('/news', {
-      title: formInfo.title,  // 标题
-      categoryId: formInfo.id, // 分类
+      // title: formInfo.title,  // 标题
+      // categoryId: formInfo.id, // 分类
+      ...formInfo,
       content: content,   // 内容
       region: user.region ? user.region : '全球', // 区域
       author: user.username, // 用户名
@@ -90,7 +92,7 @@ export default function NewsAdd(props) {
       view: 0,  // 浏览数量
       // publishTime: 0 // 发布时间
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       // 保存到草稿箱
       if (auditState === 0) {
         if (res.status === 201) {
