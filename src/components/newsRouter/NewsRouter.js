@@ -55,7 +55,7 @@ export default function NewsRouter() {
         ]).then(res => {
             // console.log(res);
             setBackRouteList([...res[0].data, ...res[1].data])
-            console.log([...res[0].data, ...res[1].data]);
+            // console.log([...res[0].data, ...res[1].data]);
         })
     }, [])
 

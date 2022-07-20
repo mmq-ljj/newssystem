@@ -1,0 +1,11 @@
+.active {
+    display: none;
+}
+
+.news_content {
+    margin-top: 50px;
+}
+
+.next {
+    margin-right: 10px;
+}
