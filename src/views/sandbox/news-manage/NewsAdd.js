@@ -220,7 +220,7 @@ export default function NewsAdd(props) {
 
             <Button
               type='primary'
-              style={{ backgroundColor: '#85ce61' }}
+              style={{ backgroundColor: '#85ce61', border: "1px solid #85ce61" }}
               onClick={() => { handleSave(1) }}
             >
               提交审核

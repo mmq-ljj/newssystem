@@ -60,19 +60,15 @@ export default function UserList() {
   const getUserList = async () => {
     // let userRoleList = []
     // const { data: userRoleList } = await axios.get('/users?_expand=role')
-    // console.log(userRoleList);
+
 
     // 获取用户列表
     const { data: userList } = await axios.get('/users')
-    // console.log(userList);
-    // setUserList(userList)
 
-    // console.log(roleId);
-    // console.log(res.data);
     setUserList(roleId === 1 ?
       userList :
       [...userList.filter(item => item.username === username),
-      ...userList.filter(item => item.region === region && item.roleId === roleId)
+      ...userList.filter(item => item.region === region && item.roleId === 3)
       ]
     )
 
@@ -98,7 +94,7 @@ export default function UserList() {
     {
       title: '区域',
       dataIndex: 'region',
-      key: 'region',
+
       align: "center",
       render: region => <b>{region === '' ? '全球' : region}</b>,
       filters: [
@@ -126,7 +122,7 @@ export default function UserList() {
       // render: role => { return role?.roleName },
       // users 接口
       dataIndex: 'roleId',
-      key: 'roleId',
+
       render: roleId => {
         if (roleId === 1) {
           return '超级管理员'
@@ -142,14 +138,14 @@ export default function UserList() {
     {
       title: '用户名',
       dataIndex: 'username',
-      key: 'username',
+
       align: "center",
     },
     // 用户状态
     {
       title: '用户状态',
       dataIndex: 'roleState',
-      key: 'roleState',
+
       align: "center",
       render: (roleState, row) => {
         return <Switch

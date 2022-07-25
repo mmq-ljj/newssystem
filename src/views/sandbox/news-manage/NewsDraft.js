@@ -165,6 +165,7 @@ export default function NewsDraft(props) {
                     pageSize: 6
                 }}
                 rowKey={item => item.id}
-            /></div>
+            />
+        </div>
     )
 }

@@ -22,6 +22,9 @@ export default function NewsPreview(props) {
 
     const publishList = ['未发布', '待发布', '已上线', '已下线']
 
+    const colorList = ['black', 'orange', 'green', 'red']
+
+
     return (
         <div>
             {
@@ -54,7 +57,7 @@ export default function NewsPreview(props) {
                             </Descriptions.Item>
 
                             <Descriptions.Item label="审核状态">
-                                <span style={{ color: "red" }}>
+                                <span style={{ color: colorList[newsInfo.auditState] }}>
                                     {
                                         auditList[newsInfo.auditState]
                                     }
@@ -62,7 +65,7 @@ export default function NewsPreview(props) {
                             </Descriptions.Item>
 
                             <Descriptions.Item label="发布状态">
-                                <span style={{ color: "red" }}>
+                                <span style={{ color: colorList[newsInfo.publishState] }}>
                                     {
                                         publishList[newsInfo.publishState]
                                     }
