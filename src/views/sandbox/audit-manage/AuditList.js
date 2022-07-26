@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 const { confirm } = Modal;
 
+
 export default function AuditList(props) {
     // 审核列表
     const [auditList, setAuditList] = useState([])
@@ -135,12 +136,12 @@ export default function AuditList(props) {
         confirm({
             title: '是否发布该条新闻?',
             icon: <ExclamationCircleOutlined />,
-            // content: 'Some descriptions',
             okText: "确定",
             cancelText: '取消',
             onOk() {
                 axios.patch(`/news/${row.id}`, {
                     publishState: 2,
+                    publishTime: Date.now(),
                 }).then(res => {
                     // console.log(res);
                     if (res.status === 200) {

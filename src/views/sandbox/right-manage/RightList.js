@@ -8,11 +8,13 @@ import {
     Popover,
     Switch
 } from 'antd';
+
 import {
     EditOutlined,
     DeleteOutlined,
     ExclamationCircleOutlined
 } from '@ant-design/icons';
+
 import axios from 'axios';
 const { confirm } = Modal;
 
