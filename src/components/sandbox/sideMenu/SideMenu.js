@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Layout, Menu } from 'antd';
 import axios from 'axios'
 import './sideMenu.scss'
+import { connect } from 'react-redux'
 
 // 1.withRouter高阶组件 包裹低阶组件
 // 2.可以通过withRouter拿到history属性
@@ -48,6 +49,7 @@ const iconList = {
 
 // 侧边导航栏组件
 function SideMenu(props) {
+    // console.log(props);
     const [menuList, setMenList] = React.useState([])
 
     // 该用户的路由权限
@@ -135,7 +137,7 @@ function SideMenu(props) {
 
     return (
         // collapsed 侧边栏折叠状态
-        <Sider trigger={null} collapsible>
+        <Sider trigger={null} collapsible collapsed={props.isCollapsed}>
             <div className='leftArea'>
                 <div className="logo">新闻发布平台</div>
                 <div className='leftMenu'>
@@ -153,4 +155,12 @@ function SideMenu(props) {
 }
 
 
-export default withRouter(SideMenu)
+// const mapStateToProps = (state) => {
+//     return state.collapsedReducer
+// }
+
+
+export default connect(
+    (state) => ({ isCollapsed: state.collapsedReducer.isCollapsed }),
+    // (state) => { console.log(state); },
+)(withRouter(SideMenu))

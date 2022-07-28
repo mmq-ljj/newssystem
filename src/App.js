@@ -3,6 +3,8 @@ import React from 'react'
 import './App.css'
 // import axios from 'axios'
 import IndexRouter from './router/IndexRouter'
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 // app根组件
 function App() {
@@ -14,7 +16,9 @@ function App() {
   // )
 
   // 注册路由 根据路劲 展示对应的 路由组件 (一级路由) 
-  return <IndexRouter></IndexRouter>
+  return <Provider store={store}>
+    <IndexRouter></IndexRouter>
+  </Provider>
 }
 
 

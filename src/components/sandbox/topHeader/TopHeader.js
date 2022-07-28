@@ -1,33 +1,28 @@
 // 顶部
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Layout, Dropdown, Menu, Avatar, Modal } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
+// 引入connect用于连接ui组件和redux
+import { connect } from 'react-redux'
 
 const { Header } = Layout;
 const { confirm } = Modal;
 
 // 顶部组件 
 function TopHeader(props) {
-    const [collapsed, setCollapsed] = useState(false);
+    // console.log(props);
+
     const changeCollapsed = () => {
-        setCollapsed(!collapsed)
+        // console.log(props);
+        props.changeCollapsed()
     }
 
     // 登录账号 用户数据
     const { role: { roleName }, username } = JSON.parse(localStorage.getItem('token'))
 
-    // console.log(userInfos);
 
-    // 
-    // useEffect(() => {
-    //     // localStorage.getItem('token')
-    // }, [])
-
-
-
-
-    // 下来菜单选项
+    // 下拉菜单选项
     const menu = (
         <Menu items={[
             {
@@ -64,7 +59,6 @@ function TopHeader(props) {
             },
         });
         // console.log(props);
-
     }
 
     return (
@@ -72,12 +66,8 @@ function TopHeader(props) {
             className="site-layout-background"
             style={{ padding: '0 16PX' }}
         >
-            {/* {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                className: 'trigger',
-                onClick: () => setCollapsed(!collapsed),
-            })} */}
             {
-                collapsed ? <MenuUnfoldOutlined onClick={changeCollapsed} /> : <MenuFoldOutlined onClick={changeCollapsed} />
+                props.isCollapsed ? <MenuUnfoldOutlined onClick={changeCollapsed} /> : <MenuFoldOutlined onClick={changeCollapsed} />
             }
 
             <div style={{ float: 'right' }}>
@@ -89,4 +79,27 @@ function TopHeader(props) {
         </Header>
     )
 }
-export default withRouter(TopHeader) 
+
+
+const mapStateToProps = (state) => {
+    return state.collapsedReducer
+}
+
+const mapDispatchToProps = {
+    changeCollapsed() {
+        return {
+            type: 'change_collapsed',
+        }
+    }
+}
+
+
+// 用connect创建并暴露容器组件
+export default connect(
+    // 映射状态
+    // (state) => ({ isCollapsed: state.collapsedReducer.isCollapsed }),
+    // 映射方法
+    // {}
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(TopHeader))

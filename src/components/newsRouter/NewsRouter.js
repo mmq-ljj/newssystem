@@ -23,7 +23,8 @@ import AuditList from '../../views/sandbox/audit-manage/AuditList'
 import Unpublished from '../../views/sandbox/publish-manage/Unpublished'
 import Published from '../../views/sandbox/publish-manage/Published'
 import Sunset from '../../views/sandbox/publish-manage/Sunset'
-
+import { Spin } from 'antd'
+import { connect } from 'react-redux'
 
 // 路由映射组件表
 const LocalRouterMap = {
@@ -50,7 +51,9 @@ const LocalRouterMap = {
     "/publish-manage/sunset": Sunset,      // 已下线
 }
 
-export default function NewsRouter() {
+function NewsRouter(props) {
+    // console.log(props);
+   
     const [backRouteList, setBackRouteList] = useState([])
 
     useEffect(() => {
@@ -78,25 +81,32 @@ export default function NewsRouter() {
 
     return (
         <div>
-            {/* 根据路由地址 展示 对应组件 (二级路由) */}
-            <Switch>
-                {
-                    backRouteList.map(item => {
-                        if (checkRoute(item) &&
-                            checkUserPermission(item)) {
-                            return <Route path={item.key} key={item.key} component={LocalRouterMap[item.key]} exact></Route>
-                        } else {
-                            return null
-                        }
-                    })
-                }
+            <Spin size="large" spinning={props.isLoading}>
+                {/* 根据路由地址 展示 对应组件 (二级路由) */}
+                <Switch>
+                    {
+                        backRouteList.map(item => {
+                            if (checkRoute(item) &&
+                                checkUserPermission(item)) {
+                                return <Route path={item.key} key={item.key} component={LocalRouterMap[item.key]} exact></Route>
+                            } else {
+                                return null
+                            }
+                        })
+                    }
 
-                {/* exact 精确匹配 */}
-                <Redirect from='/' to='/home' exact />
-                {
-                    backRouteList.length > 0 && <Route path='*' component={NoPermisssion} />
-                }
-            </Switch>
+                    {/* exact 精确匹配 */}
+                    <Redirect from='/' to='/home' exact />
+                    {
+                        backRouteList.length > 0 && <Route path='*' component={NoPermisssion} />
+                    }
+                </Switch>
+            </Spin >
         </div >
     )
 }
+
+export default connect(
+    // (state) => { console.log(state) }
+    (state) => ({ isLoading: state.loadingReducer.isLoading })
+)(NewsRouter)
